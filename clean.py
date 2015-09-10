@@ -1,6 +1,3 @@
-#!/usr/bin/python
-# -*- coding: utf-8 -*-
-
 import sys
 
 inputfile = sys.argv[1]
@@ -18,31 +15,42 @@ headers = infile.readline()
 
 num_delim = headers.count(delimiter)
 
-print 'Number of fields is ' + str(num_delim)
+print 'Number of fields is ' + str(num_delim + 1)
 outfile.write(headers)
+
 
 data = list(infile)
 
+errors = 0
+suspects = 0
+char_buffer = 0
 line_num = 1
 
-print data
-data[2:4] = [''.join(data[2:4])]
-
-print data
-
 for line in data:
-	
-    if line.count(delimiter) == num_delim:
-        #correct number
-        print line
+    char_buffer = char_buffer + line.count(delimiter)
+    #print line.replace("\n", "")
+    if char_buffer == num_delim:
         outfile.write(line)
+        char_buffer = 0
+        line_num = line_num + 1
+
+    elif char_buffer > num_delim:
+        print "Suspect data on line " + str(line_num) + ' of the output file'
+        outfile.write(line)
+        line_num = line_num + 1
+        char_buffer = 0
+        suspects = suspects + 1
 
     elif line.count(delimiter) < num_delim:
-        #not enough numbers
-        print 'Error on line ' + str(line_num)
-        print line
+        print "Error on line " + str(line_num) + ' of the output file'
+        outfile.write(line.replace("\n", ""))
+        errors = errors + 1
 
-    line_num = line_num + 1
+    else:
+        print 'something strange ...'
+
+print "Number of errors: " + str(errors)
+print "Number of suspects: " + str(suspects)
 
 infile.closed
 outfile.closed
