@@ -12,4 +12,4 @@ It uses that, and a running count of that, to know when to trim the <strong>"\n"
 ### To Do:
 1.  Wrap the arguments in into <strong> getopt </strong>
 2.  Process entire directories instead of single files
-3.  Re-order fields based on field names from a configuration file
+3.  Re-order fields based on field names from a configuration file (to ensure consistent importing into a database)
