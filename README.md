@@ -6,4 +6,4 @@ Uses the header line to determine the number of fields it should hold and output
 Haven't wrapped the system arguments in getopt yet.
 
 ### Current Usage:
-
+<code> python clean.py inputfile.txt outputfile.txt "delimiter" </code>
