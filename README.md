@@ -4,7 +4,7 @@ This is my attempt to clean carriage returns and empty lines out of text data fi
 It uses the header line to determine the number of fields it should hold and outputs to a new text file
 
 It counts the number of instances of the delimiter on each line.
-It uses that, and a running count of that, to know when to trim the <strong>\n</strong> characters from the file.
+It uses that, and a running count of that, to know when to trim the <strong>"\n" new line</strong> characters from the file.
 
 ### Current Usage:
 <code> python clean.py inputfile.txt outputfile.txt "delimiter" </code>
