@@ -1,9 +1,15 @@
 # clean-ramm-data
 
-Attempt to clean carriage returns and empty lines out of text data files
-Uses the header line to determine the number of fields it should hold and outputs to a new text file
+This is my attempt to clean carriage returns and empty lines out of text data files specifically out of RAMM.
+It uses the header line to determine the number of fields it should hold and outputs to a new text file
 
-Haven't wrapped the system arguments in getopt yet.
+It counts the number of instances of the delimiter on each line.
+It uses that, and a running count of that, to know when to trim the <strong>\n</strong> characters from the file.
 
 ### Current Usage:
 <code> python clean.py inputfile.txt outputfile.txt "delimiter" </code>
+
+### To Do:
+1.  Wrap the arguments in into <strong> getopt </strong>
+2.  Process entire directories instead of single files
+3.  Re-order field names based on a configuration file
