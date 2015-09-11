@@ -1,15 +1,18 @@
 import sys
+import os
 
 inputfile = sys.argv[1]
 outputfile = sys.argv[2]
 delimiter = sys.argv[3]
+config = sys.argv[4]
 
 print 'Input: ' + inputfile
 print 'Output: ' + outputfile
 print 'Delimiter: ' + delimiter
+print 'Config File: ' + config
 
 infile = open(inputfile, 'r')
-outfile = open(outputfile, 'w')
+outfile = open('temp_data_file.txt', 'w')
 
 headers = infile.readline()
 
@@ -52,5 +55,44 @@ for line in data:
 print "Number of errors: " + str(errors)
 print "Number of suspects: " + str(suspects)
 
-infile.closed
-outfile.closed
+infile.close()
+outfile.close()
+
+infile = open('temp_data_file.txt', 'r')
+outfile = open(outputfile, 'w')
+config = open(config, 'r')
+
+header_order = list(config)
+fields = []
+
+config.closed
+
+for field in header_order:
+    fields.append(field.replace("\n", ""))
+
+new_header = '|'.join(fields)
+
+outfile.write(new_header + "\n")
+headers = infile.readline()
+header_list = headers.replace("\n", "").split(delimiter)
+
+for line in infile:
+    values = line.replace("\n", "").split(delimiter)
+    d = dict(zip(header_list, values))
+
+    new_line = []
+
+    for field in fields:
+        if field in d:
+            new_line.append(d[field])
+        else:
+            new_line.append('')
+
+    out_line = '|'.join(new_line)
+    out_line = out_line + '\n'
+
+    outfile.write(out_line)
+
+outfile.close()
+infile.close()
+os.remove('temp_data_file.txt')
