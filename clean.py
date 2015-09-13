@@ -65,12 +65,12 @@ config = open(config, 'r')
 header_order = list(config)
 fields = []
 
-config.closed
+config.close()
 
 for field in header_order:
     fields.append(field.replace("\n", ""))
 
-new_header = '|'.join(fields)
+new_header = delimiter.join(fields)
 
 outfile.write(new_header + "\n")
 headers = infile.readline()
@@ -88,7 +88,7 @@ for line in infile:
         else:
             new_line.append('')
 
-    out_line = '|'.join(new_line)
+    out_line = delimiter.join(new_line)
     out_line = out_line + '\n'
 
     outfile.write(out_line)
