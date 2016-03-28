@@ -1,0 +1,13 @@
+contract_id->integer
+account_2->integer
+account_2_desc->text
+account_2_code->text
+explanation->text
+active->boolean
+ramm_controlled->boolean
+default_value->boolean
+display_sequence->integer
+added_on->timestamp
+added_by->text
+chgd_on->timestamp
+chgd_by->text
